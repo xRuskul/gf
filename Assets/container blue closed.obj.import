@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/container blue closed.obj-63d086daa0172c7dbf5ed04bf683e55d.mesh"
+
+[deps]
+
+files=[ "res://.import/container blue closed.obj-63d086daa0172c7dbf5ed04bf683e55d.mesh" ]
+
+source_file="res://Assets/container blue closed.obj"
+dest_files=[ "res://.import/container blue closed.obj-63d086daa0172c7dbf5ed04bf683e55d.mesh", "res://.import/container blue closed.obj-63d086daa0172c7dbf5ed04bf683e55d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

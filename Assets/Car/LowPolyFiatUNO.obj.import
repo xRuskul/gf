@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/LowPolyFiatUNO.obj-530211a15e44ac67f5fdc06a9476b61e.mesh"
+
+[deps]
+
+files=[ "res://.import/LowPolyFiatUNO.obj-530211a15e44ac67f5fdc06a9476b61e.mesh" ]
+
+source_file="res://Assets/Car/LowPolyFiatUNO.obj"
+dest_files=[ "res://.import/LowPolyFiatUNO.obj-530211a15e44ac67f5fdc06a9476b61e.mesh", "res://.import/LowPolyFiatUNO.obj-530211a15e44ac67f5fdc06a9476b61e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
