@@ -14,7 +14,7 @@ func _ready():
 func lookcollide(iscollide):
 	frontray.text = "Looking_Colliding: " + str(iscollide)
 
-func updatecords(cords):
+func updatecoords(cords):
 	speedlabel.text= "Translation: " + str(cords)
 
 func isidle(is_idle):

@@ -1,10 +1,13 @@
 extends KinematicBody
 
-onready var binoc = get_node("BinocOverlay")
-onready var camera1 = get_node("Head/Camera")
-onready var camera2 = get_node("Head2/Camera")
-onready var ui = get_node("UI")
+onready var binoc = $BinocOverlay
+onready var camera1 = $Head/Camera
+onready var camera2 = $Head2/Camera
+onready var ui = $UI
 onready var head = $Head
+onready var look = $Head/Camera/Look
+onready var ground = $GroundCheck
+
 
 var speed = 10
 var acceleration = 10
@@ -13,6 +16,7 @@ var jump = 17
 
 var mouse_sensitivity = 0.30
 
+var input_vec = Vector2()
 var direction = Vector3()
 var velocity = Vector3()
 var fall = Vector3() 
@@ -29,6 +33,13 @@ var moving_forward
 var moving_backward
 var jumping
 
+#Debug
+var moving = false
+var shouldMove = true
+var coords
+var is_holding_rifle = false
+var is_holding_pistol = false
+var is_holding_knife = false
 
 export var fov_trans := 5
 export var fov_base := 70
@@ -49,97 +60,25 @@ func _input(event):
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-90), deg2rad(90))
 
 func _physics_process(delta):
-	var iscollide = $Head/Camera/Look.is_colliding()
-	var flrcheck = $GroundCheck.is_colliding()
+	_ui_update()
+	_handle_input(delta)
+	_handle_gravity(delta)
+	_handle_movement(delta)
 	
-	ui.lookcollide(iscollide)
+	coords = self.get_translation()
+
 	moving_backward = false
 	moving_forward = false
 	moving_left = false
 	moving_right = false
 	jumping = false
 	
-	var moving = false
-	var shouldMove = true
-	var cords = self.get_translation()
-	var is_holding_rifle = false
-	var is_holding_pistol = false
-	var is_holding_knife = false
 	
-	ui.updatecords(cords)
-	direction = Vector3()
-	
-	move_and_slide(fall, Vector3.UP)
-	if not is_on_floor():
-		fall.y -= gravity
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		fall.y = jump
-		jumping = true
-	
-	if Input.is_action_pressed("move_forward"):
-		if shouldMove == true:
-			direction -= transform.basis.z
-			moving = true
-			moving_forward = true
-	elif Input.is_action_pressed("move_backward"):
-		if shouldMove == true:
-			direction += transform.basis.z
-			moving = true
-			moving_backward = true
-	if Input.is_action_pressed("move_left"):
-			if shouldMove == true:
-				direction -= transform.basis.x
-				moving = true
-				moving_left = true
-	elif Input.is_action_pressed("move_right"):
-			if shouldMove == true:
-				direction += transform.basis.x
-				moving = true
-				moving_right = true
-	
-	if Input.is_action_just_pressed("crouch"):
-		jump = 5
-		var size = Vector3(3, 2, 3)
-		self.set_scale(size)
-	if Input.is_action_just_released("crouch"):
-		jump = 10
-		var regSize = Vector3(3, 3, 3)
-		self.set_scale(regSize)
-
-	direction = direction.normalized()
-	velocity = velocity.linear_interpolate(direction * speed, acceleration * delta) 
-	velocity = move_and_slide(velocity, Vector3.UP) 
-	
-	if Input.is_action_pressed("zoom"):
-		$Crosshair.visible = false
-		#camera1.fov = 20
-		camera1.set_fov(lerp(camera1.get_fov(), fov_zoom, fov_trans * delta))
-		binoc.visible = true
-	else:
-		$Crosshair.visible = true
-		camera1.set_fov(lerp(camera1.get_fov(), fov_base, fov_trans * delta))
-		binoc.visible = false
-	#if Input.is_action_just_released("zoom"):
-	#	camera1.fov = 70
-	#	$Crosshair.visible = true
-	#	binoc.visible = false
-	if Input.is_action_just_pressed("debug"):
-		ui.visible = true
-	if Input.is_action_just_released("debug"):
-		ui.visible = false
-	
-	if Input.is_action_just_pressed("cam"):
-		camera2.make_current()
-	if Input.is_action_just_released("cam"):
-		camera1.clear_current()
-		camera1.make_current()
 	if moving == false:
 		is_idle = true
 	if moving == true:
 		is_idle = false
-	ui.ismoving(moving)
-	ui.isidle(is_idle)
-	ui.floorcheck(flrcheck)
+
 	
 	# Animations
 	
@@ -162,6 +101,69 @@ func _physics_process(delta):
 	if is_holding_pistol == true:
 		pass
 
+#gravity gets it's own function
+func _handle_gravity(delta):
+	move_and_slide(fall, Vector3.UP)
+	if !is_on_floor():
+		fall.y -= gravity
+
+# Input functions should be placed here
+func _handle_input(delta):
+	
+	if Input.is_action_pressed("crouch"):
+		jump = 5
+		var size = Vector3(3, 2, 3)
+		self.set_scale(size)
+	else:
+		jump = 10
+		var regSize = Vector3(3, 3, 3)
+		self.set_scale(regSize)
+	
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		fall.y = jump
+		jumping = true
+
+	if Input.is_action_pressed("zoom"):
+		$Crosshair.visible = false
+		camera1.set_fov(lerp(camera1.get_fov(), fov_zoom, fov_trans * delta))
+		binoc.visible = true
+	else:
+		$Crosshair.visible = true
+		camera1.set_fov(lerp(camera1.get_fov(), fov_base, fov_trans * delta))
+		binoc.visible = false
+
+
+	if Input.is_action_pressed("debug"):
+		ui.visible = true
+	else:
+		ui.visible = false
+	
+	if Input.is_action_pressed("cam"):
+		camera2.make_current()
+	else:
+		camera1.clear_current()
+		camera1.make_current()
+
+	input_vec.y = Input.get_action_strength('move_backward') - Input.get_action_strength('move_forward')
+	input_vec.x = Input.get_action_strength('move_right') - Input.get_action_strength('move_left')
+	input_vec = input_vec.normalized().rotated(-rotation.y)
+
+# get direction and apply movement
+func _handle_movement(delta):
+	direction.z = input_vec.y
+	direction.x = input_vec.x
+
+	direction = direction.normalized()
+	velocity = velocity.linear_interpolate(direction * speed, acceleration * delta) 
+	velocity = move_and_slide(velocity, Vector3.UP) 
+
+# update ui?
+func _ui_update():
+	ui.lookcollide(look)
+	ui.ismoving(moving)
+	ui.isidle(is_idle)
+	ui.floorcheck(ground)
+	ui.updatecoords(coords)
 
 func _on_Area_area_entered(area):
 	fall.y = jump
