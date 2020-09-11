@@ -76,23 +76,23 @@ albedo_texture = ExtResource( 1 )
 [sub_resource type="ConcavePolygonShape" id=19]
 data = PoolVector3Array( 3.9642, -0.2371, 1.2909, 3.9642, 0.0003, 1.2909, -4.0308, -0.2369, 1.2908, 3.9642, 0.0003, 1.2909, -4.0308, 0.0004, 1.2908, -4.0308, -0.2369, 1.2908, -4.0308, 0.0004, 1.4248, 3.9642, 0.0003, 1.425, -4.0308, -0.2369, 1.4248, 3.9642, 0.0003, 1.425, 3.9642, -0.2371, 1.425, -4.0308, -0.2369, 1.4248, -4.0308, 0.0004, 1.2908, -4.0308, 0.0004, 1.4248, -4.0308, -0.2369, 1.2908, -4.0308, 0.0004, 1.4248, -4.0308, -0.2369, 1.4248, -4.0308, -0.2369, 1.2908, 3.9642, -0.2371, 1.425, 3.9642, 0.0003, 1.425, 3.9642, -0.2371, 1.2909, 3.9642, 0.0003, 1.425, 3.9642, 0.0003, 1.2909, 3.9642, -0.2371, 1.2909, -4.0308, -0.2369, 1.4248, 3.9642, -0.2371, 1.425, -4.0308, -0.2369, 1.2908, 3.9642, -0.2371, 1.425, 3.9642, -0.2371, 1.2909, -4.0308, -0.2369, 1.2908, 3.9642, -0.2371, -1.291, -4.0308, -0.2369, -1.2908, 3.9642, 0.0003, -1.291, -4.0308, -0.2369, -1.2908, -4.0308, 0.0004, -1.2908, 3.9642, 0.0003, -1.291, -4.0308, 0.0004, -1.4248, -4.0308, -0.2369, -1.4248, 3.9642, 0.0003, -1.425, -4.0308, -0.2369, -1.4248, 3.9642, -0.2371, -1.425, 3.9642, 0.0003, -1.425, -4.0308, 0.0004, -1.2908, -4.0308, -0.2369, -1.2908, -4.0308, 0.0004, -1.4248, -4.0308, -0.2369, -1.2908, -4.0308, -0.2369, -1.4248, -4.0308, 0.0004, -1.4248, 3.9642, -0.2371, -1.425, 3.9642, -0.2371, -1.291, 3.9642, 0.0003, -1.425, 3.9642, -0.2371, -1.291, 3.9642, 0.0003, -1.291, 3.9642, 0.0003, -1.425, -4.0308, -0.2369, -1.4248, -4.0308, -0.2369, -1.2908, 3.9642, -0.2371, -1.425, -4.0308, -0.2369, -1.2908, 3.9642, -0.2371, -1.291, 3.9642, -0.2371, -1.425, 4.0315, 0.0003, -1.4878, 4.0315, 2.4925, -1.4878, -4.0315, 0.0003, -1.4878, 4.0315, 2.4925, -1.4878, -4.0315, 2.4925, -1.4878, -4.0315, 0.0003, -1.4878, -4.0315, 2.4922, 1.4878, 4.0315, 2.4922, 1.4878, -4.0315, 0, 1.4878, 4.0315, 2.4922, 1.4878, 4.0315, 0, 1.4878, -4.0315, 0, 1.4878, 4.0315, 0, 1.4878, 4.0315, 2.4922, 1.4878, 4.0315, 0.0003, -1.4878, 4.0315, 2.4922, 1.4878, 4.0315, 2.4925, -1.4878, 4.0315, 0.0003, -1.4878, 4.0315, 2.4925, -1.4878, 4.0315, 2.4922, 1.4878, -4.0315, 2.4925, -1.4878, 4.0315, 2.4922, 1.4878, -4.0315, 2.4922, 1.4878, -4.0315, 2.4925, -1.4878, -4.0315, 0, 1.4878, 4.0315, 0, 1.4878, -4.0315, 0.0003, -1.4878, 4.0315, 0, 1.4878, 4.0315, 0.0003, -1.4878, -4.0315, 0.0003, -1.4878, -4.0315, 2.4925, -1.4878, -4.0315, 2.4922, 1.4878, -4.0315, 0.0003, -1.4878, -4.0315, 2.4922, 1.4878, -4.0315, 0, 1.4878, -4.0315, 0.0003, -1.4878 )
 
-[sub_resource type="SpatialMaterial" id=21]
+[sub_resource type="SpatialMaterial" id=20]
 albedo_texture = ExtResource( 9 )
 
-[sub_resource type="ConcavePolygonShape" id=22]
+[sub_resource type="ConcavePolygonShape" id=21]
 data = PoolVector3Array( -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1 )
 
-[sub_resource type="CubeMesh" id=23]
+[sub_resource type="CubeMesh" id=22]
 
-[sub_resource type="SpatialMaterial" id=24]
+[sub_resource type="SpatialMaterial" id=23]
 albedo_texture = ExtResource( 6 )
 
-[sub_resource type="ConcavePolygonShape" id=25]
+[sub_resource type="ConcavePolygonShape" id=24]
 data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[sub_resource type="CubeMesh" id=26]
+[sub_resource type="CubeMesh" id=25]
 
-[sub_resource type="SpatialMaterial" id=27]
+[sub_resource type="SpatialMaterial" id=26]
 albedo_color = Color( 0.713726, 0.713726, 0.713726, 1 )
 albedo_texture = ExtResource( 6 )
 
@@ -257,42 +257,42 @@ transform = Transform( -6.51683e-07, -4, 1.74846e-07, 0, -1.74846e-07, -4, 4, -6
 [node name="Crate1" type="MeshInstance" parent="Main/Decor"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.97754, 2, -29.949 )
 mesh = ExtResource( 10 )
-material/0 = SubResource( 21 )
+material/0 = SubResource( 20 )
 
 [node name="StaticBody" type="StaticBody" parent="Main/Decor/Crate1"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Main/Decor/Crate1/StaticBody"]
-shape = SubResource( 22 )
+shape = SubResource( 21 )
 
 [node name="Crate2" type="MeshInstance" parent="Main/Decor"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.97754, 2, -34.8355 )
 mesh = ExtResource( 10 )
-material/0 = SubResource( 21 )
+material/0 = SubResource( 20 )
 
 [node name="StaticBody" type="StaticBody" parent="Main/Decor/Crate2"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Main/Decor/Crate2/StaticBody"]
-shape = SubResource( 22 )
+shape = SubResource( 21 )
 
 [node name="Crate3" type="MeshInstance" parent="Main/Decor"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.97754, 6.00431, -32.182 )
 mesh = ExtResource( 10 )
-material/0 = SubResource( 21 )
+material/0 = SubResource( 20 )
 
 [node name="StaticBody" type="StaticBody" parent="Main/Decor/Crate3"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Main/Decor/Crate3/StaticBody"]
-shape = SubResource( 22 )
+shape = SubResource( 21 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Main/Decor"]
 transform = Transform( 10.0713, -0.163111, 0, 6.52442, 0.251784, 0, 0, 0, 1, -56.8445, 5.44098, 52.3943 )
-mesh = SubResource( 23 )
-material/0 = SubResource( 24 )
+mesh = SubResource( 22 )
+material/0 = SubResource( 23 )
 
 [node name="StaticBody" type="StaticBody" parent="Main/Decor/MeshInstance"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Main/Decor/MeshInstance/StaticBody"]
-shape = SubResource( 25 )
+shape = SubResource( 24 )
 
 [node name="Barrel" parent="Main/Decor" instance=ExtResource( 11 )]
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -47.6175, -0.0237825, 52.1206 )
@@ -302,8 +302,8 @@ transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -47.6175, 5.05045, 52.1206 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="Main/Decor"]
 transform = Transform( 14, 0, 0, 0, 0.3, 0, 0, 0, 2, 35.8366, 12.9084, -60.8304 )
-mesh = SubResource( 26 )
-material/0 = SubResource( 27 )
+mesh = SubResource( 25 )
+material/0 = SubResource( 26 )
 
 [node name="Player" parent="." instance=ExtResource( 14 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 9.03444, 0 )

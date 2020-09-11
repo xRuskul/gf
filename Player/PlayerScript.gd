@@ -1,5 +1,11 @@
 extends KinematicBody
 
+onready var binoc = get_node("BinocOverlay")
+onready var camera1 = get_node("Head/Camera")
+onready var camera2 = get_node("Head2/Camera")
+onready var ui = get_node("UI")
+onready var head = $Head
+
 var speed = 10
 var acceleration = 10
 var gravity = 0.09
@@ -16,17 +22,20 @@ var is_upright = true
 var is_thirdPerson = false
 var is_idle = false
 
+#States
 var moving_left
 var moving_right
 var moving_forward
 var moving_backward
 var jumping
 
-onready var binoc = get_node("BinocOverlay")
-onready var camera1 = get_node("Head/Camera")
-onready var camera2 = get_node("Head2/Camera")
-onready var ui = get_node("UI")
-onready var head = $Head
+
+export var fov_trans := 5
+export var fov_base := 70
+export var fov_zoom := 20
+
+var curr_fov
+
 func _ready():
 	binoc.visible = false
 	ui.visible = false
@@ -42,26 +51,31 @@ func _input(event):
 func _physics_process(delta):
 	var iscollide = $Head/Camera/Look.is_colliding()
 	var flrcheck = $GroundCheck.is_colliding()
+	
 	ui.lookcollide(iscollide)
 	moving_backward = false
 	moving_forward = false
 	moving_left = false
 	moving_right = false
 	jumping = false
+	
 	var moving = false
 	var shouldMove = true
 	var cords = self.get_translation()
 	var is_holding_rifle = false
 	var is_holding_pistol = false
 	var is_holding_knife = false
+	
 	ui.updatecords(cords)
 	direction = Vector3()
+	
 	move_and_slide(fall, Vector3.UP)
 	if not is_on_floor():
 		fall.y -= gravity
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		fall.y = jump
 		jumping = true
+	
 	if Input.is_action_pressed("move_forward"):
 		if shouldMove == true:
 			direction -= transform.basis.z
@@ -82,6 +96,7 @@ func _physics_process(delta):
 				direction += transform.basis.x
 				moving = true
 				moving_right = true
+	
 	if Input.is_action_just_pressed("crouch"):
 		jump = 5
 		var size = Vector3(3, 2, 3)
@@ -90,17 +105,24 @@ func _physics_process(delta):
 		jump = 10
 		var regSize = Vector3(3, 3, 3)
 		self.set_scale(regSize)
+
 	direction = direction.normalized()
 	velocity = velocity.linear_interpolate(direction * speed, acceleration * delta) 
 	velocity = move_and_slide(velocity, Vector3.UP) 
-	if Input.is_action_just_pressed("zoom"):
+	
+	if Input.is_action_pressed("zoom"):
 		$Crosshair.visible = false
-		camera1.fov = 20
+		#camera1.fov = 20
+		camera1.set_fov(lerp(camera1.get_fov(), fov_zoom, fov_trans * delta))
 		binoc.visible = true
-	if Input.is_action_just_released("zoom"):
-		camera1.fov = 70
+	else:
 		$Crosshair.visible = true
+		camera1.set_fov(lerp(camera1.get_fov(), fov_base, fov_trans * delta))
 		binoc.visible = false
+	#if Input.is_action_just_released("zoom"):
+	#	camera1.fov = 70
+	#	$Crosshair.visible = true
+	#	binoc.visible = false
 	if Input.is_action_just_pressed("debug"):
 		ui.visible = true
 	if Input.is_action_just_released("debug"):
