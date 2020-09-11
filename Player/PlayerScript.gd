@@ -36,6 +36,7 @@ var jumping
 #Debug
 var moving = false
 var shouldMove = true
+var canJump = true
 var coords
 var is_holding_rifle = false
 var is_holding_pistol = false
@@ -101,11 +102,14 @@ func _physics_process(delta):
 	if is_holding_pistol == true:
 		pass
 
-#gravity gets it's own function
+# gravity gets its own function
 func _handle_gravity(delta):
 	move_and_slide(fall, Vector3.UP)
 	if !is_on_floor():
 		fall.y -= gravity
+		canJump = false
+	else:
+		canJump = true
 
 # Input functions should be placed here
 func _handle_input(delta):
@@ -119,9 +123,11 @@ func _handle_input(delta):
 		var regSize = Vector3(3, 3, 3)
 		self.set_scale(regSize)
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") && canJump:
 		fall.y = jump
 		jumping = true
+	else:
+		jumping = false
 
 	if Input.is_action_pressed("zoom"):
 		$Crosshair.visible = false
@@ -131,7 +137,6 @@ func _handle_input(delta):
 		$Crosshair.visible = true
 		camera1.set_fov(lerp(camera1.get_fov(), fov_base, fov_trans * delta))
 		binoc.visible = false
-
 
 	if Input.is_action_pressed("debug"):
 		ui.visible = true
@@ -150,6 +155,10 @@ func _handle_input(delta):
 
 # get direction and apply movement
 func _handle_movement(delta):
+	
+	if jumping:
+		fall.y = jump
+
 	direction.z = input_vec.y
 	direction.x = input_vec.x
 
