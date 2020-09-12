@@ -11,11 +11,11 @@ onready var frontray = get_node("Look")
 func _ready():
 	pass
 
-func lookcollide(iscollide):
-	frontray.text = "Looking_Colliding: " + str(iscollide)
+func lookcollide(look):
+	frontray.text = "Looking_Colliding: " + str(look)
 
-func updatecoords(cords):
-	speedlabel.text= "Translation: " + str(cords)
+func updatecoords(coords):
+	speedlabel.text= "Translation: " + str(coords)
 
 func isidle(is_idle):
 	idlelable.text = "Is_Idle: " + str(is_idle)

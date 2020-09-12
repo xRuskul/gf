@@ -16,9 +16,6 @@ var wep2 = null
 func _ready() -> void:
 	current_slot = item_slot[Slot_1]
 
-func _process(delta: float) -> void:
-	pass
-
 func Swap_Weapon():
 	if current_slot == 0:
 		current_slot = item_slot[Slot_2]

@@ -7,6 +7,9 @@
 [ext_resource path="res://Resources/Res_Weapon/M4A1.tres" type="Resource" id=5]
 [ext_resource path="res://Scenes/Scn_Bullets/Bullet.tscn" type="PackedScene" id=6]
 
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 0.0614725, 0.247171, 0.547059 )
+
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Body002"
 surfaces/0 = {
@@ -193,21 +196,21 @@ surfaces/0 = {
 "vertex_count": 32
 }
 
-[sub_resource type="BoxShape" id=11]
-extents = Vector3( 0.0614725, 0.247171, 0.558911 )
-
 [node name="M4A1" type="RigidBody" groups=[
 "Weapon",
 ]]
 script = ExtResource( 4 )
 stats = ExtResource( 5 )
 Bullet = ExtResource( 6 )
-Muzzle = NodePath("WeaponCollision/Muzzle")
+Muzzle = NodePath("Visuals/Muzzle")
 magSize = 30
 ammoCount = 30
 
+[node name="WeaponCollision" type="CollisionShape" parent="."]
+shape = SubResource( 11 )
+
 [node name="Visuals" type="Spatial" parent="."]
-transform = Transform( -0.125, 0, -4.86768e-08, 0, 0.125, 0, 4.86768e-08, 0, -0.125, 0, 0, -0.5 )
+transform = Transform( -0.125, 0, -4.07302e-08, 0, 0.125, 0, 4.07302e-08, 0, -0.125, 0, 0, 0 )
 
 [node name="Body002" type="MeshInstance" parent="Visuals"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.66984 )
@@ -262,9 +265,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.66984 )
 mesh = SubResource( 10 )
 material/0 = null
 
-[node name="WeaponCollision" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )
-shape = SubResource( 11 )
-
-[node name="Muzzle" type="Spatial" parent="WeaponCollision"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.142022, -0.748666 )
+[node name="Muzzle" type="Spatial" parent="Visuals"]
+transform = Transform( -8, 0, 3.11532e-06, 0, 8, 0, -3.11532e-06, 0, -8, -2.81524e-06, 1.13618, 7.36 )

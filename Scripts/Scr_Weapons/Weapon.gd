@@ -1,12 +1,12 @@
 extends RigidBody
 
-export(Resource) var stats
+export(Resource) onready var stats
 
 export(PackedScene) var Bullet
 export(NodePath) var Muzzle
 
-onready var bullet = Bullet
-onready var muzzle = Muzzle
+onready var muzzle = get_node(Muzzle)
+onready var bullet = preload('res://Scenes/Scn_Bullets/Bullet.tscn')
 
 export var magSize := 10
 export var ammoCount := 10
@@ -47,7 +47,7 @@ func _reloadTimer() -> void:
 func _shoot():
 	if ammoCount != 0 && stats.canFire:
 		ammoCount -= 1
-		print('Shots Left', ' ',ammoCount)
+		print('Shots Left ',ammoCount)
 		var b = bullet.instance()
 		muzzle.add_child(b)
 		b.shoot = true

@@ -8,8 +8,9 @@ onready var camera2 = $Head/Camera_TPS
 onready var ui = $UI
 onready var crosshair = $Crosshair
 onready var head = $Head
-onready var look = $Head/Camera/Look
+onready var look = $Head/Camera_FPS/Look
 onready var ground = $CollisionShape/GroundCheck
+onready var wepManager = $Head/WeaponManager
 
 onready var jump = player_stats.jumpPower
 onready var speed = player_stats.default_speed
@@ -19,6 +20,7 @@ var direction = Vector3()
 var velocity = Vector3()
 var fall = Vector3() 
 
+var is_shooting = false
 var is_zoomed = false
 var is_crouching = false
 var is_sprinting = false
@@ -26,6 +28,7 @@ var is_jumping = false
 var is_upright = true
 var is_thirdPerson = false
 var is_idle = false
+
 
 #States
 var moving_left = false
@@ -44,6 +47,7 @@ var is_holding_pistol = false
 var is_holding_knife = false
 
 var curr_fov
+var look_col
 
 func _ready():
 	binoc.visible = false
@@ -58,6 +62,8 @@ func _input(event):
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-90), deg2rad(90))
 
 func _physics_process(delta):
+	look_col = look.get_collider()
+	
 	_ui_update()
 	_handle_input(delta)
 	_handle_gravity(delta)
@@ -107,7 +113,37 @@ func _handle_gravity(delta):
 
 # Input functions should be placed here
 func _handle_input(delta):
+
+	# Weapon Inputs
+	if Input.is_action_just_pressed('Pickup'):
+		if look.is_colliding():
+			if look_col.is_in_group('Weapon'):
+				#set_as_toplevel(true)
+				wepManager.add_child(look_col.duplicate())
+				wepManager.Pickup_Weapon()
+				look_col.queue_free()
+			else:
+				print('Not Weapon')
+
+	if Input.is_action_just_pressed('Reload'):
+		wepManager.Reload()
 	
+	if Input.is_action_just_pressed('Drop'):
+		wepManager.Drop_Weapon()
+
+	if Input.is_action_just_pressed('Swap'):
+		wepManager.Swap_Weapon()
+
+	if Input.is_action_just_pressed('Fire'):
+		if wepManager.current_slot == 0 && wepManager.wep != null:
+			wepManager.current_weapon[0]._shoot()
+		if wepManager.current_slot == 1 && wepManager.wep2 != null:
+			wepManager.current_weapon[0]._shoot()
+		is_shooting = true
+	else:
+		is_shooting = false
+
+	# Movement Inputs
 	if Input.is_action_pressed('sprint'):
 		speed = player_stats.sprint_speed
 	
@@ -122,11 +158,19 @@ func _handle_input(delta):
 	else:
 		is_jumping = false
 
+	input_vec.y = Input.get_action_strength('move_backward') - Input.get_action_strength('move_forward')
+	input_vec.x = Input.get_action_strength('move_right') - Input.get_action_strength('move_left')
+	input_vec = input_vec.normalized().rotated(-rotation.y)
+
+
+	# Utility Inputs
 	if Input.is_action_pressed("zoom"):
 		is_zoomed = true
 	else:
 		is_zoomed = false
 
+
+	# Debug Inputs
 	if Input.is_action_pressed("debug"):
 		ui.visible = true
 	else:
@@ -138,9 +182,6 @@ func _handle_input(delta):
 		camera1.clear_current()
 		camera1.make_current()
 
-	input_vec.y = Input.get_action_strength('move_backward') - Input.get_action_strength('move_forward')
-	input_vec.x = Input.get_action_strength('move_right') - Input.get_action_strength('move_left')
-	input_vec = input_vec.normalized().rotated(-rotation.y)
 
 # get direction and apply movement
 func _handle_movement(delta):
