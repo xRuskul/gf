@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/container green closed.obj-5bb0bd78eb124941f38bb8b6f7cbc758.mesh"
+
+[deps]
+
+files=[ "res://.import/container green closed.obj-5bb0bd78eb124941f38bb8b6f7cbc758.mesh" ]
+
+source_file="res://Assets/Models/Mdl_Props/Container_Shipping/container green closed.obj"
+dest_files=[ "res://.import/container green closed.obj-5bb0bd78eb124941f38bb8b6f7cbc758.mesh", "res://.import/container green closed.obj-5bb0bd78eb124941f38bb8b6f7cbc758.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

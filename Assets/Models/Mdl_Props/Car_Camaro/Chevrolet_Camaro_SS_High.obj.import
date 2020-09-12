@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Chevrolet_Camaro_SS_High.obj-f2e90362666dceedce35db0756490336.mesh"
+
+[deps]
+
+files=[ "res://.import/Chevrolet_Camaro_SS_High.obj-f2e90362666dceedce35db0756490336.mesh" ]
+
+source_file="res://Assets/Models/Mdl_Props/Car_Camaro/Chevrolet_Camaro_SS_High.obj"
+dest_files=[ "res://.import/Chevrolet_Camaro_SS_High.obj-f2e90362666dceedce35db0756490336.mesh", "res://.import/Chevrolet_Camaro_SS_High.obj-f2e90362666dceedce35db0756490336.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

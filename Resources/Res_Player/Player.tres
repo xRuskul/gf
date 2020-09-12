@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Scr_Player/PlayerData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+default_speed = 7.0
+crouch_speed = 3.0
+sprint_speed = 14.0
+crouch_transition = 20.0
+accel = 20
+grav = 0.098
+gravMult = 1
+jumpPower = 17
+crouchJump = 5
+regularJump = 10
+mouse_sense = 0.3
+cam_clamp = 75
+jump_time = 0.75
+fov_trans = 5
+fov_base = 70
+fov_zoom = 20

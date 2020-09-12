@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Player/UI.gd" type="Script" id=1]
-[ext_resource path="res://Player/PlayerScript.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Scr_UI/UI.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Scr_Player/PlayerScript.gd" type="Script" id=2]
 [ext_resource path="res://Player/BoxCrosshair.png" type="Texture" id=3]
 [ext_resource path="res://Player/SeekPng.com_white-transparent-png_3369209.png" type="Texture" id=4]
-[ext_resource path="res://Crosshairs/Black/crosshair009.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Textures/Tex_UI/Crosshairs/Black/crosshair009.png" type="Texture" id=5]
 [ext_resource path="res://Player/Standard Walk.dae" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Scr_Managers/WeaponManager.gd" type="Script" id=7]
+[ext_resource path="res://Resources/Res_Player/Player.tres" type="Resource" id=8]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.411607, 1.13477, 0.182175 )
@@ -13,16 +15,27 @@ extents = Vector3( 0.411607, 1.13477, 0.182175 )
 [node name="FPS" type="KinematicBody"]
 collision_layer = 2
 script = ExtResource( 2 )
+player_stats = ExtResource( 8 )
 
 [node name="Head" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.60836, -0.242839 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.30836, -0.342839 )
 
-[node name="Camera" type="Camera" parent="Head"]
+[node name="WeaponManager" type="Spatial" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32007, -0.296794, -0.101553 )
+script = ExtResource( 7 )
 
-[node name="Look" type="RayCast" parent="Head/Camera"]
+[node name="Camera_FPS" type="Camera" parent="Head"]
+keep_aspect = 0
+far = 1000.0
+
+[node name="Look" type="RayCast" parent="Head/Camera_FPS"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.139701, 0 )
 enabled = true
 cast_to = Vector3( 0, 0, -100 )
+
+[node name="Camera_TPS" type="Camera" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 0.88808, 0.459688, 0, -0.459688, 0.88808, 0, 0.0724308, 2.01925 )
+fov = 80.0
 
 [node name="UI" type="Control" parent="."]
 anchor_right = 1.0
@@ -105,19 +118,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Head2" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.19727, 1.90266 )
-
-[node name="Camera" type="Camera" parent="Head2"]
-transform = Transform( 1, 0, 0, 0, 0.88808, 0.459688, 0, -0.459688, 0.88808, 0, -0.516479, -0.126252 )
-fov = 80.0
-
-[node name="GroundCheck" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0343544, -0.942275, 0.0109281 )
-enabled = true
-cast_to = Vector3( 0, -0.5, 0 )
-collide_with_areas = true
-
 [node name="BinocOverlay" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
@@ -154,3 +154,9 @@ transform = Transform( -1.5, 0, 4.88762e-07, 0, 1.5, 0, -4.88762e-07, 0, -1.5, 0
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11129, 0 )
 shape = SubResource( 1 )
+
+[node name="GroundCheck" type="RayCast" parent="CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0343544, -1.05356, 0.0109281 )
+enabled = true
+cast_to = Vector3( 0, -0.5, 0 )
+collide_with_areas = true
