@@ -6,7 +6,7 @@ export(PackedScene) var Bullet
 export(NodePath) var Muzzle
 
 onready var muzzle = get_node(Muzzle)
-onready var bullet = preload('res://Scenes/Scn_Bullets/Bullet.tscn')
+onready var bullet = Bullet #preload('res://Scenes/Scn_Bullets/Bullet.tscn')
 
 export var magSize := 10
 export var ammoCount := 10

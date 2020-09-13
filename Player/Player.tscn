@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Scr_UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Scr_Player/PlayerScript.gd" type="Script" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Player/Standard Walk.dae" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/Scr_Managers/WeaponManager.gd" type="Script" id=7]
 [ext_resource path="res://Resources/Res_Player/Player.tres" type="Resource" id=8]
-[ext_resource path="res://Scenes/Scn_Weapons/M4A1.tscn" type="PackedScene" id=9]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.411607, 1.13477, 0.182175 )
@@ -22,10 +21,8 @@ player_stats = ExtResource( 8 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.30836, -0.342839 )
 
 [node name="WeaponManager" type="Spatial" parent="Head"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.147135, -0.264448, -0.469901 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10183, -0.164448, -0.269901 )
 script = ExtResource( 7 )
-
-[node name="M4A1" parent="Head/WeaponManager" instance=ExtResource( 9 )]
 
 [node name="Camera_FPS" type="Camera" parent="Head"]
 keep_aspect = 0
