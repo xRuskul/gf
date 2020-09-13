@@ -181,7 +181,6 @@ func _handle_input(delta):
 		camera1.clear_current()
 		camera1.make_current()
 
-
 # get direction and apply movement
 func _handle_movement(delta):
 	
