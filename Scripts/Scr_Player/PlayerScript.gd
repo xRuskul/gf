@@ -2,6 +2,7 @@ extends KinematicBody
 
 export(Resource) var player_stats
 
+export(NodePath) onready var collider
 onready var binoc = $BinocOverlay
 onready var camera1 = $Head/Camera_FPS
 onready var camera2 = $Head/Camera_TPS
@@ -12,6 +13,7 @@ onready var look = $Head/Camera_FPS/Look
 onready var ground = $CollisionShape/GroundCheck
 onready var wepManager = $Head/WeaponManager
 
+onready var player_collider = get_node(collider)
 onready var jump = player_stats.jumpPower
 onready var speed = player_stats.default_speed
 
@@ -48,6 +50,7 @@ var is_holding_knife = false
 
 var curr_fov
 var look_col
+
 
 func _ready():
 	binoc.visible = false
@@ -104,7 +107,6 @@ func _handle_animation():
 
 # gravity gets its own function
 func _handle_gravity(delta):
-	move_and_slide(fall, Vector3.UP)
 	if !is_on_floor():
 		fall.y -= player_stats.grav
 		canJump = false
@@ -187,15 +189,15 @@ func _handle_movement(delta):
 		fall.y = jump
 
 	if is_crouching:
+		player_collider.shape.height -= player_stats.crouch_transition * delta
 		speed = player_stats.crouch_speed
 		jump = player_stats.crouchJump
-		var size = Vector3(1, 0.5, 1)
-		self.set_scale(size)
-	else:
+	elif !is_crouching:
+		player_collider.shape.height += player_stats.crouch_transition * delta
 		speed = player_stats.default_speed
 		jump = player_stats.regularJump
-		var regSize = Vector3(1, 1, 1) 
-		self.set_scale(regSize)
+	player_collider.shape.height = clamp(player_collider.shape.height, player_stats.crouch_height, player_stats.default_height)
+	
 
 	if is_zoomed:
 		crosshair.visible = false
@@ -212,7 +214,8 @@ func _handle_movement(delta):
 
 	direction = direction.normalized()
 	velocity = velocity.linear_interpolate(direction * speed, player_stats.accel * delta) 
-	velocity = move_and_slide(velocity, Vector3.UP) 
+	velocity = move_and_slide(velocity, Vector3.UP)
+	move_and_slide(fall, Vector3.UP)
 
 # update ui?
 func _ui_update():
@@ -222,5 +225,5 @@ func _ui_update():
 	ui.floorcheck(ground)
 	ui.updatecoords(coords)
 
-func _on_Area_area_entered(area):
-	fall.y = jump
+#func _on_Area_area_entered(area):
+#	fall.y = jump

@@ -9,13 +9,14 @@
 [ext_resource path="res://Scripts/Scr_Managers/WeaponManager.gd" type="Script" id=7]
 [ext_resource path="res://Resources/Res_Player/Player.tres" type="Resource" id=8]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.411607, 1.13477, 0.182175 )
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.67
 
 [node name="FPS" type="KinematicBody"]
 collision_layer = 2
 script = ExtResource( 2 )
 player_stats = ExtResource( 8 )
+collider = NodePath("CollisionShape")
 
 [node name="Head" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.30836, -0.342839 )
@@ -150,14 +151,14 @@ texture = ExtResource( 5 )
 [node name="Standard Walk" parent="." instance=ExtResource( 6 )]
 transform = Transform( -1.5, 0, 4.88762e-07, 0, 1.5, 0, -4.88762e-07, 0, -1.5, 0, 0, 0 )
 
-[node name="CollisionShape" type="CollisionShape" parent="." groups=[
-"Player",
-]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11129, 0 )
-shape = SubResource( 1 )
-
-[node name="GroundCheck" type="RayCast" parent="CollisionShape"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0343544, -1.05356, 0.0109281 )
+[node name="GroundCheck" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0343544, -0.05356, 0.0109281 )
 enabled = true
 cast_to = Vector3( 0, -0.5, 0 )
 collide_with_areas = true
+
+[node name="CollisionShape" type="CollisionShape" parent="." groups=[
+"Player",
+]]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 1.1, 0 )
+shape = SubResource( 1 )
