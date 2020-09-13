@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Scr_Player/PlayerData.gd"
 }, {
+"base": "RigidBody",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Scripts/Scr_Weapons/Weapon.gd"
+}, {
 "base": "Resource",
 "class": "WeaponStats",
 "language": "GDScript",
@@ -26,6 +31,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "PlayerData": "",
+"Weapon": "",
 "WeaponStats": "",
 "Weapon_Manager": ""
 }
@@ -112,6 +118,11 @@ Drop={
 Reload={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+SwapMode={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":66,"unicode":0,"echo":false,"script":null)
  ]
 }
 

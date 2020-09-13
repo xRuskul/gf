@@ -28,3 +28,5 @@ func floorcheck(cfloor):
 
 func _physics_process(delta):
 	fpslabel.text = "FPS: " + str(Engine.get_frames_per_second())
+
+

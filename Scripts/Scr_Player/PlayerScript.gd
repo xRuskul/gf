@@ -118,12 +118,13 @@ func _handle_input(delta):
 	if Input.is_action_just_pressed('Pickup'):
 		if look.is_colliding():
 			if look_col.is_in_group('Weapon'):
-				#set_as_toplevel(true)
 				wepManager.add_child(look_col.duplicate())
 				wepManager.Pickup_Weapon()
 				look_col.queue_free()
+			elif look_col.is_in_group('Attachment'):
+				wepManager.Pickup_Attachment()
 			else:
-				print('Not Weapon')
+				print('Not Weapon or Attachment')
 
 	if Input.is_action_just_pressed('Reload'):
 		wepManager.Reload()
@@ -134,14 +135,10 @@ func _handle_input(delta):
 	if Input.is_action_just_pressed('Swap'):
 		wepManager.Swap_Weapon()
 
-	if Input.is_action_just_pressed('Fire'):
-		if wepManager.current_slot == 0 && wepManager.wep != null:
-			wepManager.current_weapon[0]._shoot()
-		if wepManager.current_slot == 1 && wepManager.wep2 != null:
-			wepManager.current_weapon[0]._shoot()
-		is_shooting = true
-	else:
-		is_shooting = false
+	if Input.is_action_just_pressed('SwapMode'):
+		wepManager.Swap_Mode()
+
+	wepManager.Shoot(Input.is_action_just_pressed('Fire'), Input.is_action_pressed('Fire'))
 
 	# Movement Inputs
 	if Input.is_action_pressed('sprint'):
@@ -197,7 +194,7 @@ func _handle_movement(delta):
 	else:
 		speed = player_stats.default_speed
 		jump = player_stats.regularJump
-		var regSize = Vector3(1, 1, 1)
+		var regSize = Vector3(1, 1, 1) 
 		self.set_scale(regSize)
 
 	if is_zoomed:

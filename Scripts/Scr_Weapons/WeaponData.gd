@@ -30,8 +30,8 @@ enum AMMO_TYPE{
 export(WEAPON_TYPE) var WeaponType
 export(AMMO_TYPE) var AmmoType
 
-export(FIRE_MODES) var FireModeOne
-export(FIRE_MODES) var FireModeTwo = 1
+export(FIRE_MODES) var FireModeOne = FIRE_MODES.SEMI
+export(FIRE_MODES) var FireModeTwo = FIRE_MODES.AUTO
 export(Curve) var RecoilPattern
 
 export var hasMultiFire = false
@@ -50,3 +50,7 @@ export var reloadFromEmpty := 1.5
 
 export var Damage := 5.0
 export var HeadshotMult := 1.5
+
+export var MuzzleVelocity := 1000
+
+var FireMode = FireModeOne
