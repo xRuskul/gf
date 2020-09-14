@@ -8,32 +8,9 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Resource",
-"class": "PlayerData",
-"language": "GDScript",
-"path": "res://Scripts/Scr_Player/PlayerData.gd"
-}, {
-"base": "RigidBody",
-"class": "Weapon",
-"language": "GDScript",
-"path": "res://Scripts/Scr_Weapons/Weapon.gd"
-}, {
-"base": "Resource",
-"class": "WeaponStats",
-"language": "GDScript",
-"path": "res://Scripts/Scr_Weapons/WeaponData.gd"
-}, {
-"base": "Spatial",
-"class": "Weapon_Manager",
-"language": "GDScript",
-"path": "res://Scripts/Scr_Managers/WeaponManager.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"PlayerData": "",
-"Weapon": "",
-"WeaponStats": "",
-"Weapon_Manager": ""
+
 }
 
 [application]
